@@ -38,11 +38,11 @@ BROWSER := python -c "$$BROWSER_PYSCRIPT"
 help: show-help
 
 ## remove all build, test, coverage and Python artifacts
-clean: clean-build clean-pyc clean-test 
+clean: clean-build clean-pyc clean-test
 
 
 ## remove build artifacts
-clean-build: 
+clean-build:
 	rm -fr build/
 	rm -fr dist/
 	rm -fr .eggs/
@@ -50,40 +50,40 @@ clean-build:
 	find . -name '*.egg' -exec rm -f {} +
 
 ## remove Python file artifacts
-clean-pyc: 
+clean-pyc:
 	find . -name '*.pyc' -exec rm -f {} +
 	find . -name '*.pyo' -exec rm -f {} +
 	find . -name '*~' -exec rm -f {} +
 	find . -name '__pycache__' -exec rm -fr {} +
 
 ## remove test and coverage artifacts
-clean-test: 
+clean-test:
 	rm -fr .tox/
 	rm -f .coverage
 	rm -fr htmlcov/
 
 ## check style with flake8
-lint: 
+lint:
 	flake8 coordinator_data_tasks tests
 
 ## run tests quickly with the default Python
-test: 
+test:
 	pytest
 
 
 ## run tests on every Python version with tox
-test-all: 
+test-all:
 	tox
 
 ## check code coverage quickly with the default Python
-coverage: 
+coverage:
 	coverage run --source coordinator_data_tasks -m pytest
 	coverage report -m
 	coverage html
 	$(BROWSER) htmlcov/index.html
 
 ## generate Sphinx HTML documentation, including API docs
-docs: 
+docs:
 	rm -f docs/coordinator_data_tasks.rst
 	rm -f docs/modules.rst
 	$(MAKE) -C docs clean
@@ -91,22 +91,22 @@ docs:
 	$(BROWSER) docs/_build/html/index.html
 
 ## compile the docs watching for changes
-servedocs: docs 
+servedocs: docs
 	watchmedo shell-command -p '*.rst' -c '$(MAKE) -C docs html' -R -D .
 
 ## package and upload a release
-release: clean 
+release: clean
 	python setup.py sdist upload
 	python setup.py bdist_wheel upload
 
 ## builds source and wheel package
-dist: clean 
+dist: clean
 	python setup.py sdist
 	python setup.py bdist_wheel
 	ls -l dist
 
 ## install the package to the active Python's site-packages
-install: clean 
+install: clean
 	python setup.py install
 
 
@@ -117,7 +117,7 @@ endif
 
 
 ## installs virtual environments and requirements
-install-conda-env: 
+install-conda-env:
 ifeq ($(CONDA_ENV_PY), $(shell which python))
 	@echo "Project conda env already installed."
 else
@@ -136,7 +136,7 @@ install-dev-reqs:
 
 
 ## uninstalls virtual environments and requirements
-uninstall-conda-env: 
+uninstall-conda-env:
 	source activate $(CONDA_ENV_NAME); \
 	rm -rf $$(jupyter --data-dir)/kernels/$(CONDA_ENV_NAME); \
 	rm -rf $(CONDA_ENV_DIR)
