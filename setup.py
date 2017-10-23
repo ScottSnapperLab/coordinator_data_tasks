@@ -47,7 +47,7 @@ test_requirements = filter_req_paths(paths=["requirements.test.txt"], func=is_pi
 
 setup(
     name='coordinator_data_tasks',
-    version='0.0.1',
+    version='0.0.2',
     description="A python-based command line utility to automate some of the most common data tasks faced by the Clinical Coordinators.",
     long_description=readme + '\n\n' + history,
     author="Gus Dunn",
