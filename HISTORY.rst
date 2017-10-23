@@ -2,6 +2,13 @@
 History
 =======
 
+v0.0.2/ 2017-10-23
+==================
+
+  * prelim tests
+  * allow from coordinator_data_tasks import commands
+  * travis ci setup
+
 v0.0.1 / 2017-10-23
 ===================
 
