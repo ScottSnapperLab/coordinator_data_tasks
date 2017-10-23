@@ -68,8 +68,8 @@ lint:
 
 ## run tests quickly with the default Python
 test: 
-	py.test
-	
+	pytest
+
 
 ## run tests on every Python version with tox
 test-all: 
