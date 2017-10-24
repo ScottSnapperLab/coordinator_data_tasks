@@ -12,6 +12,7 @@ def main(left_path: Path, right_path: Path, join_on: t.List[str], out: Path, ind
     if indicator:
         indicator = "FOUND_IN"
 
+    log.info(f"Attempting left-join with tables ({left_path.name}, {right_path.name}) on columns ({join_on}).")
     # Load files
     left = pd.read_excel(str(left_path), sheetname=0)
     right = pd.read_excel(str(right_path), sheetname=0)
@@ -39,3 +40,4 @@ def main(left_path: Path, right_path: Path, join_on: t.List[str], out: Path, ind
 
     # Write the results
     result.to_excel(str(out), index=True, sheet_name="Results")
+    log.info(f"Join completed. Written to {str(out)}.")
