@@ -4,7 +4,10 @@
 """The setup script."""
 
 from setuptools import setup, find_packages
+import inspect
 from pathlib import Path
+
+HOME_DIR = Path(inspect.getfile(inspect.currentframe())).parent
 
 
 def filter_req_paths(paths, func):
@@ -15,18 +18,18 @@ def filter_req_paths(paths, func):
     libs = set()
     junk = set(['\n'])
     for p in paths:
-        with Path(p).open(mode='r') as reqs:
+        with p.open(mode='r') as reqs:
             lines = set([line for line in reqs if func(line)])
             libs.update(lines)
 
     return list(libs - junk)
 
 
-def is_pipable(s):
+def is_pipable(line):
     """Filter for pipable reqs."""
-    if "# not_pipable" in s:
+    if "# not_pipable" in line:
         return False
-    elif s.startswith('#'):
+    elif line.startswith('#'):
         return False
     else:
         return True
@@ -38,12 +41,12 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-requirements = filter_req_paths(paths=["requirements.txt",
-                                       "requirements.pip.txt"], func=is_pipable)
+requirements = filter_req_paths(paths=[HOME_DIR / "requirements.txt",
+                                       HOME_DIR / "requirements.pip.txt"], func=is_pipable)
 
-setup_requirements = filter_req_paths(paths=["requirements.setup.txt"], func=is_pipable)
+setup_requirements = ["pytest-runner"]
 
-test_requirements = filter_req_paths(paths=["requirements.test.txt"], func=is_pipable)
+test_requirements = ["pytest"]
 
 setup(
     name='coordinator_data_tasks',

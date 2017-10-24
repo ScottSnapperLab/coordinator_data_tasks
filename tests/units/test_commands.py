@@ -3,11 +3,6 @@
 from hashlib import md5
 from pathlib import Path
 import shutil
-import tempfile
-
-from logzero import logger as log
-
-import pandas as pd
 
 import pytest
 

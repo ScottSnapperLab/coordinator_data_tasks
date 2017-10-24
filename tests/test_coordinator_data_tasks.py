@@ -7,7 +7,7 @@ import pytest
 
 from click.testing import CliRunner
 
-from coordinator_data_tasks import coordinator_data_tasks
+from coordinator_data_tasks import coordinator_data_tasks # noqa E401
 from coordinator_data_tasks import cli
 
 
