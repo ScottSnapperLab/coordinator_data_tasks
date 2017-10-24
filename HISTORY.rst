@@ -2,6 +2,25 @@
 History
 =======
 
+v0.0.3 / 2017-10-24
+===================
+
+  * Makefile: experimenting with install structure
+  * test_coordinator_data_tasks.py: removed useless test
+  * cli.py: added join subcommands
+  * requirements.dev.pip.txt: mypy lives here now
+  * docs/index.rst: fixed too few `==` under title
+  * docs/conf.py: upgraded auto-build code
+  * left_join.py: more log entries
+  * moved recommonmark req to requirements.pip.txt
+  * got tox to work
+  * Makefile: experimenting with install structure
+  * MANIFEST.in: add req files to allow tox to work
+  * flake8
+  * removed setup and test specific req files
+  * README.rst: fixed badge address errors
+  * fix repo in travis ci setup
+
 v0.0.2/ 2017-10-23
 ==================
 
