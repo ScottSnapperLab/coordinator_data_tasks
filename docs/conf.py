@@ -20,6 +20,8 @@ from pathlib import Path
 import shlex
 
 from sphinx.apidoc import main as sphinx_apidoc
+import recommonmark
+from recommonmark.transform import AutoStructify
 from recommonmark.parser import CommonMarkParser
 
 from logzero import logger as log
@@ -53,6 +55,11 @@ def run_apidoc(_):
 
 
 def setup(app):
+    app.add_config_value('recommonmark_config', {
+        'url_resolver': lambda url: github_doc_root + url,
+        'auto_toc_tree_section': 'Contents',
+    }, True)
+    app.add_transform(AutoStructify)
     app.connect('builder-inited', run_apidoc)
 
 # If your documentation needs a minimal Sphinx version, state it here.
