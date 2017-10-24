@@ -106,8 +106,9 @@ dist: clean
 	ls -l dist
 
 ## install the package to the active Python's site-packages
-install: clean
-	python setup.py install
+install: clean install-conda-env install-pip-reqs install-jupyter-kernel
+	source activate $(CONDA_ENV_NAME) && \
+	pip install -e .
 
 
 error_if_active_conda_env:
@@ -118,21 +119,21 @@ endif
 
 ## installs virtual environments and requirements
 install-conda-env:
-ifeq ($(CONDA_ENV_PY), $(shell which python))
-	@echo "Project conda env already installed."
-else
-	conda create -n $(CONDA_ENV_NAME) --file requirements.txt --yes  && \
+	conda create -n $(CONDA_ENV_NAME) --file requirements.txt --yes
+
+install-pip-reqs:
+	source activate $(CONDA_ENV_NAME) && \
+	pip install -r requirements.pip.txt
+
+
+install-jupyter-kernel:
 	source activate $(CONDA_ENV_NAME) && \
 	python -m ipykernel install --sys-prefix --name $(CONDA_ENV_NAME) --display-name "$(CONDA_ENV_NAME)" && \
-	pip install -r requirements.pip.txt && \
-	pip install -e .
-endif
-
 
 ## installs requirements needed for development
 install-dev-reqs:
 	source activate $(CONDA_ENV_NAME) && \
-	conda install --file requirements.dev.txt
+	conda install --file requirements.dev.txt --file requirements.pip.txt   --file requirements.setup.txt --file requirements.test.txt --yes &&
 
 
 ## uninstalls virtual environments and requirements
