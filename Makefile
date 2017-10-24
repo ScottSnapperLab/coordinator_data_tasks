@@ -1,6 +1,7 @@
 .PHONY: clean clean-test clean-pyc clean-build docs help
 .DEFAULT_GOAL := help
 
+PACKAGE_NAME = coordinator_data_tasks
 CONDA_ENV_NAME = data_tasks
 CONDA_ROOT = $(shell conda info --root)
 CONDA_ENV_DIR = $(CONDA_ROOT)/envs/$(CONDA_ENV_NAME)
@@ -62,6 +63,10 @@ clean-test:
 	rm -f .coverage
 	rm -fr htmlcov/
 
+## check typing with mypy
+mypy:
+	mypy --ignore-missing-imports coordinator_data_tasks
+
 ## check style with flake8
 lint:
 	flake8 coordinator_data_tasks tests
@@ -84,7 +89,8 @@ coverage:
 
 ## generate Sphinx HTML documentation, including API docs
 docs:
-	rm -f docs/coordinator_data_tasks.rst
+	rm -f docs/$(PACKAGE_NAME).rst
+	rm -f docs/$(PACKAGE_NAME).*.rst
 	rm -f docs/modules.rst
 	$(MAKE) -C docs clean
 	$(MAKE) -C docs html
@@ -105,8 +111,10 @@ dist: clean
 	python setup.py bdist_wheel
 	ls -l dist
 
-## install the package to the active Python's site-packages
-install: clean install-conda-env install-pip-reqs install-jupyter-kernel
+## installs virtual environments and requirements
+install: clean install-conda-env install-jupyter-kernel install-pip-reqs install-dev-reqs install-pip-editable
+
+install-pip-editable:
 	source activate $(CONDA_ENV_NAME) && \
 	pip install -e .
 
@@ -117,27 +125,26 @@ ifeq (True,$(PROJECT_CONDA_ACTIVE))
 endif
 
 
-## installs virtual environments and requirements
 install-conda-env:
 	conda create -n $(CONDA_ENV_NAME) --file requirements.txt --yes
 
 install-pip-reqs:
 	source activate $(CONDA_ENV_NAME) && \
-	pip install -r requirements.pip.txt
+	pip install -r requirements.pip.txt && \
+	pip install -r requirements.dev.pip.txt
 
 
 install-jupyter-kernel:
 	source activate $(CONDA_ENV_NAME) && \
-	python -m ipykernel install --sys-prefix --name $(CONDA_ENV_NAME) --display-name "$(CONDA_ENV_NAME)" && \
+	python -m ipykernel install --sys-prefix --name $(CONDA_ENV_NAME) --display-name "$(CONDA_ENV_NAME)"
 
-## installs requirements needed for development
 install-dev-reqs:
 	source activate $(CONDA_ENV_NAME) && \
-	conda install --file requirements.dev.txt --file requirements.pip.txt   --file requirements.setup.txt --file requirements.test.txt --yes &&
+	conda install --file requirements.dev.txt --yes
 
 
 ## uninstalls virtual environments and requirements
-uninstall-conda-env:
+uninstall-conda-env: error_if_active_conda_env
 	source activate $(CONDA_ENV_NAME); \
 	rm -rf $$(jupyter --data-dir)/kernels/$(CONDA_ENV_NAME); \
 	rm -rf $(CONDA_ENV_DIR)
