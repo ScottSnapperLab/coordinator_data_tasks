@@ -1,5 +1,5 @@
 Welcome to Coordinator Data Tasks's documentation!
-======================================
+==================================================
 
 Contents:
 
