@@ -28,13 +28,15 @@ A python-based command line utility to automate some of the most common data tas
 Features
 --------
 
-* TODO
+* left joins on multiple columns
+* smart loading of \*.xls, \*.xlsx, \*.csv, \*.csv.gz files
 
 Credits
 ---------
 
-This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
+This package was created with Cookiecutter_ and the `xguse/cookiecutter-pypackage`_ project template which is based on `audreyr/cookiecutter-pypackage`_.
 
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
 .. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
+.. _`xguse/cookiecutter-pypackage`: https://github.com/xguse/cookiecutter-pypackage
 
