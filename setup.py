@@ -50,7 +50,7 @@ test_requirements = ["pytest"]
 
 setup(
     name='coordinator_data_tasks',
-    version='0.0.4',
+    version='0.0.5',
     description="A python-based command line utility to automate some of the most common data tasks faced by the Clinical Coordinators.",
     long_description=readme + '\n\n' + history,
     author="Gus Dunn",
