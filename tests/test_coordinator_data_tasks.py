@@ -3,7 +3,7 @@
 
 """Tests for `coordinator_data_tasks` package."""
 
-import pytest
+import pytest  # noqa E401
 
 from click.testing import CliRunner
 

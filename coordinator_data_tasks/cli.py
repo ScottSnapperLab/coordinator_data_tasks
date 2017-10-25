@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 """Console script for coordinator_data_tasks."""
 # Imports
-import typing as t
 import logging
 from pathlib import Path
 
