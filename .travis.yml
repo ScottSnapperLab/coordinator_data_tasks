@@ -18,7 +18,7 @@ deploy:
       NUlHaFZLcGdCZk81aEVGaDVTSUlQYWFjbHBFcjZKQXZGUzNGNGY1TGNDSitkVCtLRmhqZFovQTMv
       Q2I2S3NzdmppOWdHeVNISjBrbUR1T05tNTUvWnVKcjZlMVVrL1pMbFZyaUdSZHkxeG5mbENjbDQ9
   true:
-    python: 2.7
+    python: 3.6
     repo: ScottSnapperLab/coordinator_data_tasks
     tags: true
 install: pip install -U tox-travis
