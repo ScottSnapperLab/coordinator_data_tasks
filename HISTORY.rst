@@ -2,6 +2,14 @@
 History
 =======
 
+v0.0.5 / 2017-10-25
+===================
+
+  * updated docs
+  * Makefile: pull-req-check aliased to test-all
+  * flake8
+  * make test-all now tests docs build
+
 v0.0.4 / 2017-10-25
 ===================
 
