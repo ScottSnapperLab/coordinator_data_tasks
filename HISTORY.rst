@@ -2,6 +2,14 @@
 History
 =======
 
+v0.0.4 / 2017-10-25
+===================
+
+  * travis tests now passing
+  * changed pypi deploy target to 3.7
+  * utils/loaders.py: added file (smart table loaders)
+  * track some xls files for tests
+
 v0.0.3 / 2017-10-24
 ===================
 
@@ -21,8 +29,8 @@ v0.0.3 / 2017-10-24
   * README.rst: fixed badge address errors
   * fix repo in travis ci setup
 
-v0.0.2/ 2017-10-23
-==================
+v0.0.2 / 2017-10-23
+===================
 
   * prelim tests
   * allow from coordinator_data_tasks import commands
