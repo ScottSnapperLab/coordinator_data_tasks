@@ -149,6 +149,9 @@ uninstall-conda-env: error_if_active_conda_env
 	rm -rf $$(jupyter --data-dir)/kernels/$(CONDA_ENV_NAME); \
 	rm -rf $(CONDA_ENV_DIR)
 
+## alias to test-all (purpose: minimal req for submitting a pull request)
+pull-req-check: test-all
+
 
 #################################################################################
 # Self Documenting Commands                                                     #
