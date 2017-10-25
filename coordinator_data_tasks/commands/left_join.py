@@ -6,6 +6,8 @@ import pandas as pd
 
 from logzero import logger as log
 
+from coordinator_data_tasks.utils import loaders
+
 
 def main(left_path: Path, right_path: Path, join_on: t.List[str], out: Path, indicator=True) -> None:
     """Left join excel sheets (left_path, right_path) on columns (join_on)."""
@@ -14,8 +16,8 @@ def main(left_path: Path, right_path: Path, join_on: t.List[str], out: Path, ind
 
     log.info(f"Attempting left-join with tables ({left_path.name}, {right_path.name}) on columns ({join_on}).")
     # Load files
-    left = pd.read_excel(str(left_path), sheetname=0)
-    right = pd.read_excel(str(right_path), sheetname=0)
+    left = loaders.load_table(str(left_path), sheetname=0)
+    right = loaders.load_table(str(right_path), sheetname=0)
 
     # Do the Join
     result = left.merge(right=right, on=join_on, how='left', indicator=indicator)
