@@ -1,3 +1,4 @@
+python>=3.6 # not_pipable
 click
 pandas
 numpy
